@@ -1,4 +1,4 @@
-//*---------------------------------------------Funcion que asigna eventos---------------------------------------//
+//*----------------------Funcion que asigna eventos y se ejecuta cuando cargue el documento------------------------//
 $(document).ready(function()
 {
 	$("#name").keyup(validaName); 
@@ -7,25 +7,27 @@ $(document).ready(function()
 	$("#password").keyup(validaPass); 
 	$("#select_bici").click(validaBici); 
 });
-//------------------------------------funcion principal que llama a las demas funciones--------------------------//
+//------------------------------------Funcion principal que valida el formulario-------------------------------------//
 function validateForm()
 {
-	var salidaForm=$("#salida_form");
+	validaName();
 	validaLastName();
     validaEmail();
-    validaName();
 	validaPass();
 	validaBici();
-	if(validaName()&&validaLastName()==true&&validaEmail()==true&&validaPass()==true&&validaBici()==true)
-		salidaForm.innerHTML='<p style="color:green;">Formulario Enviado Correctamente ✔</p>';  
+
+	if(validaName() && validaLastName() && validaEmail() && validaPass() && validaBici())
+		salidaForm.innerHTML='<p style="color:green; font-size:15px;" class="animated rubberBand">Formulario Enviado Correctamente ✔</p>';  
   	else
-     	salidaForm.innerHTML='<p style="color:red;">Llena todos los campos correctamente</p>';
+     	salidaForm.innerHTML='<p style="color:red; font-size:15px;" class="animated rubberBand">Llena todos los campos correctamente</p>';
 }
-//-----------------------------------Funcion que crea nodos SPAN--------------------------------------------------//
-function crearNodo(container,mensaje)
+//-----------------------------------Funcion que crea nodos de tipo SPAN------------------------------------------//
+function crearSpan(container,mensaje)
 {    	
     if(container.find('span').length==0)
-    	container.append("<span> "+mensaje+"</span>");
+    {
+    	container.append("<span class='animated fadeInLeft'> "+mensaje+"</span>");
+    }
 }
 //-------------------------------------------VALIDA NOMBRE SEGUN FORMATO VALIDO----------------------------------//
 function validaName() 
@@ -38,12 +40,12 @@ function validaName()
  		isValid=true;
  	}
    	else{
-   		crearNodo(contenedorName,"Debes llenar el campo");
+   		crearSpan(contenedorName,"Debes Ingresar un nombre valido (solo letras).");
    		isValid=false;
   	}
   	return isValid;
 }
-//-------------------------------------------VALIDA NOMBRE SEGUN FORMATO VALIDO----------------------------------//
+//-------------------------------------------VALIDA APELLIDO SEGUN FORMATO VALIDO----------------------------------//
 function validaLastName() 
 {
 	var contenedorLastname=$("#contenedorLastname");
@@ -57,13 +59,13 @@ function validaLastName()
  	}
    	else
    	{
-		crearNodo(contenedorLastname,"Debes llenar el campo");
+		crearSpan(contenedorLastname,"Debes Ingresar un apellido valido (solo letras).");
 		isValid=false;
   	}
 
   	return isValid;
 }
-//--------------------------------------//
+//---------------------------------------------VALIDA EMAIL SEGUN FORMATO VALIDO-----------------------------------//
 function validaEmail() 
 { 
   	var contenedorEmail=$("#contenedorEmail");
@@ -77,13 +79,13 @@ function validaEmail()
  	}
  	else
  	{
-	    crearNodo(contenedorEmail,"Debes llenar el campo");
+	    crearSpan(contenedorEmail,"Debes Ingresar un email valido");
 	    isValid=false;
   	}
 
   return isValid;
 }
-//---------------------------------------------------------------------------------------//
+//----------------------------------------------VALIDA PASSWORD SEGUN FORMATO VALIDO-------------------------------//
 function validaPass()
 {
 	var contenedorPassword=$("#contenedorPassword");
@@ -92,7 +94,7 @@ function validaPass()
 
   	if(!password.match(/.{6,}/) || password=="123456" || password.toLowerCase()=="password" || password=="098754")
   	{
-   	 	crearNodo(contenedorPassword,"Debes ingresar contraseña.");
+   	 	crearSpan(contenedorPassword,"Debes Ingresar una contraseña valida");
     	isValid=false;
   	}
   	else
@@ -103,7 +105,7 @@ function validaPass()
   	}
   return isValid;
 }
-//------------------------------------------------------------------------------------------//
+//-----------------------------------------VALIDA QUE SELECCIONES UN TIPO DE BICICLETA------------------------------//
 function validaBici()
 {
 	var contenedorBici=$("#contenedorBici");
@@ -117,9 +119,9 @@ function validaBici()
   	} 
   	else
   	{   
-    	crearNodo(contenedorBici,"Debes seleccionar un tipo de  Bicicleta.");
+    	crearSpan(contenedorBici,"Debes seleccionar un tipo de  Bicicleta.");
     	isValid=false;
   	}   
   return isValid;
 } 
-//------------------------------------------------------------------------------------------//
+//------------------------------------------------------------FIN--------------------------------------------------//
