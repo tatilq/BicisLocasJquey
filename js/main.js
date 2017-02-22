@@ -17,9 +17,9 @@ function validateForm()
 	validaBici();
 
 	if(validaName() && validaLastName() && validaEmail() && validaPass() && validaBici())
-		salidaForm.innerHTML='<p style="color:green; font-size:15px;" class="animated rubberBand">Formulario Enviado Correctamente ✔</p>';  
+		salidaForm.innerHTML='<p style="color:green;" class="animated rubberBand">Formulario Enviado Correctamente ✔</p>';  
   	else
-     	salidaForm.innerHTML='<p style="color:red; font-size:15px;" class="animated rubberBand">Llena todos los campos correctamente</p>';
+     	salidaForm.innerHTML='<p style="color:red;" class="animated rubberBand">Llena todos los campos correctamente</p>';
 }
 //-----------------------------------Funcion que crea nodos de tipo SPAN------------------------------------------//
 function crearSpan(container,mensaje)
@@ -32,9 +32,10 @@ function crearSpan(container,mensaje)
 //-------------------------------------------VALIDA NOMBRE SEGUN FORMATO VALIDO----------------------------------//
 function validaName() 
 {
-	var name=$("#name").val();
 	var contenedorName=$("#contenedorName");
+	var name=$("#name").val();
 	var isValid=false;
+
  	if(name.length > 0 && name.match(/^[a-zA-Z\s]*$/)){
  		$("#contenedorName span").remove();
  		isValid=true;
