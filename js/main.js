@@ -10,16 +10,19 @@ $(document).ready(function()
 //------------------------------------Funcion principal que valida el formulario-------------------------------------//
 function validateForm()
 {
-	validaName();
-	validaLastName();
-    validaEmail();
-	validaPass();
-	validaBici();
+  var salidaForm=$('#salidaForm');
+  validaName();
+  validaLastName();
+  validaEmail();
+  validaPass();
+  validaBici();
 
-	if(validaName() && validaLastName() && validaEmail() && validaPass() && validaBici())
-		salidaForm.innerHTML='<p style="color:green;" class="animated rubberBand">Formulario Enviado Correctamente ✔</p>';  
-  	else
-     	salidaForm.innerHTML='<p style="color:red;" class="animated rubberBand">Llena todos los campos correctamente</p>';
+  if(validaName() && validaLastName() && validaEmail() && validaPass() && validaBici()){
+  	 salidaForm.html('<p style="color:green;" class="animated rubberBand">Formulario Enviado Correctamente ✔</p>');  
+  }
+  else{
+     salidaForm.html('<p style="color:red;" class="animated rubberBand">Llena todos los campos correctamente</p>');
+  }
 }
 
 //-----------------------------------Funcion que crea nodos de tipo SPAN------------------------------------------//
