@@ -21,6 +21,7 @@ function validateForm()
   	else
      	salidaForm.innerHTML='<p style="color:red;" class="animated rubberBand">Llena todos los campos correctamente</p>';
 }
+
 //-----------------------------------Funcion que crea nodos de tipo SPAN------------------------------------------//
 function crearSpan(container,mensaje)
 {    	
@@ -29,14 +30,35 @@ function crearSpan(container,mensaje)
     	container.append("<span class='animated fadeInLeft'> "+mensaje+"</span>");
     }
 }
+//------------------------------------FUNCION QUE CONVIERTE LA PRIMERA LETRA EN MAYUSCULA-------------------------//
+function primMayuscula(id){
+    var nombreArray = id.split("");
+    var primeraLetra = nombreArray[0];
+    var primeraMayus = primeraLetra.toUpperCase();
+    var cortePalabra = false;
+     for(var i=1;i<nombreArray.length;i++)
+        {
+          if(cortePalabra)
+          {    
+            primeraMayus += nombreArray[i].toUpperCase();
+            cortePalabra = false;
+          }
+          else
+              primeraMayus+=nombreArray[i];
+          if(nombreArray[i] == " ")
+              cortePalabra = true;
+        }
+    return primeraMayus;
+}  
 //-------------------------------------------VALIDA NOMBRE SEGUN FORMATO VALIDO----------------------------------//
 function validaName() 
 {
 	var contenedorName=$("#contenedorName");
-	var name=$("#name").val();
+	var name=$("#name");
 	var isValid=false;
 
- 	if(name.length > 0 && name.match(/^[a-zA-Z\s]*$/)){
+ 	if(name.val().length > 0 && name.val().match(/^[a-zA-Z\s]*$/)){
+ 		name.val(primMayuscula(name.val()));
  		$("#contenedorName span").remove();
  		isValid=true;
  	}
@@ -50,11 +72,12 @@ function validaName()
 function validaLastName() 
 {
 	var contenedorLastname=$("#contenedorLastname");
-	var lastname=$("#lastname").val();
+	var lastname=$("#lastname");
 	var isValid=false;
 
- 	if(lastname.length > 0 && lastname.match(/^[a-zA-Z\s]*$/))
+ 	if(lastname.val().length > 0 && lastname.val().match(/^[a-zA-Z\s]*$/))
  	{
+ 		lastname.val(primMayuscula(lastname.val()));
  		$("#contenedorLastname span" ).remove();
  		isValid=true;
  	}
